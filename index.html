@@ -1,41 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Break the Stereotype</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Break The Stereotype</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .card {
+            background: crimson;
+            padding: 25px;
+            cursor: pointer;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.2s;
+            font-size: 16px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes shake {
+            0% { transform: scale(1.2) translateX(0); }
+            25% { transform: scale(1.2) translateX(-5px); }
+            50% { transform: scale(1.2) translateX(5px); }
+            75% { transform: scale(1.2) translateX(-5px); }
+            100% { transform: scale(1.2) translateX(0); }
+        }
+
+        .card.hit {
+            background: black;
+            animation: shake 0.4s;
+        }
+
+        /* Center result */
+        .center-box {
+            text-align: center;
+        }
+
+        .center-box h1 {
+            font-size: 50px;
+        }
+
+        .center-box p {
+            font-size: 28px;
+            color: #00ffcc;
+        }
+
+        .center-box button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        /* Rotate message */
+        .rotate-msg {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            font-size: 22px;
+            color: #00ffcc;
+        }
+
+        /* Portrait mode → ask rotate */
+        @media (orientation: portrait) {
+            .grid, h1, .subtitle {
+                display: none;
+            }
+            .rotate-msg {
+                display: block;
+            }
+        }
+    </style>
 </head>
-
-<audio id="bgMusic" loop>
-    <source src="bg-music.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="hitSound">
-    <source src="hit.mp3" type="audio/mpeg">
-</audio>
 
 <body>
 
-<div id="rotateMessage">
-    🔄 Please rotate your phone to landscape mode
-</div>
+    <div class="rotate-msg">
+        🔄 Please rotate your phone to landscape mode
+    </div>
 
-<h1>🎯 Break The Stereotype</h1>
-<h3>Click on a stereotype to destroy it</h3>
+    <h1>🎯 Break The Stereotype</h1>
+    <p class="subtitle">Click on a stereotype to destroy it</p>
 
-<div class="grid">
-    <div class="card" onclick="hit(this, 'Girls can be scientists')">Girls can’t do science</div>
-    <div class="card" onclick="hit(this, 'Boys can dance')">Boys don’t dance</div>
-    <div class="card" onclick="hit(this, 'Age doesn’t limit learning')">Old people can’t learn</div>
-    <div class="card" onclick="hit(this, 'Success has no disability')">Disabled people can’t succeed</div>
-    <div class="card" onclick="hit(this, 'Men can cook too')">Cooking is for women</div>
-    <div class="card" onclick="hit(this, 'Girls can play sports')">Girls are weak</div>
-    <div class="card" onclick="hit(this, 'Jobs don’t define character')">Rich people are arrogant</div>
-    <div class="card" onclick="hit(this, 'Anyone can lead')">Leaders are always men</div>
-    <div class="card" onclick="hit(this, 'Dreams have no limits')">Poor people can’t dream big</div>
-</div>
+    <div class="grid">
+        <div class="card" onclick="hit(this, 'Girls CAN do science')">Girls can't do science</div>
+        <div class="card" onclick="hit(this, 'Boys CAN dance')">Boys don't dance</div>
+        <div class="card" onclick="hit(this, 'Age is not a limit to learning')">Old people can't learn</div>
 
-<div id="truthBox"></div>
+        <div class="card" onclick="hit(this, 'Disability is not inability')">Disabled people can't succeed</div>
+        <div class="card" onclick="hit(this, 'Cooking is for everyone')">Cooking is for women</div>
+        <div class="card" onclick="hit(this, 'Girls are strong and powerful')">Girls are weak</div>
 
-<script src="script.js"></script>
+        <div class="card" onclick="hit(this, 'Money does not define character')">Rich people are arrogant</div>
+        <div class="card" onclick="hit(this, 'Leadership has no gender')">Leaders are always men</div>
+        <div class="card" onclick="hit(this, 'Dreams are free for everyone')">Poor people can't dream big</div>
+    </div>
+
+    <script>
+        function hit(card, truth) {
+            card.innerHTML = "🎯 Dart Hit!";
+            card.classList.add("hit");
+
+            setTimeout(() => {
+                document.body.innerHTML = `
+                    <div class="center-box">
+                        <h1>✅ Truth Revealed</h1>
+                        <p>${truth}</p>
+                        <button onclick="location.reload()">Play Again</button>
+                    </div>
+                `;
+
+                document.body.style.display = "flex";
+                document.body.style.justifyContent = "center";
+                document.body.style.alignItems = "center";
+                document.body.style.height = "100vh";
+                document.body.style.margin = "0";
+            }, 2000);
+        }
+    </script>
+
 </body>
 </html>
