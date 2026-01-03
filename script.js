@@ -1,4 +1,13 @@
-function hit(card, truth) {
+function hit(// play hit sound
+document.getElementById("hitSound").play();
+
+// start background music (only once)
+const bgMusic = document.getElementById("bgMusic");
+if (bgMusic.paused) {
+    bgMusic.volume = 0.4; // soft sound
+    bgMusic.play();
+} )
+ {
 
     card.innerHTML = "🎯 Dart Hit!";
     card.classList.add("hit");

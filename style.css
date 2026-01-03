@@ -65,3 +65,34 @@ body {
     margin-top: 20px;
     cursor: pointer;
 }
+
+/* 🔄 Rotate warning screen */
+#rotateMessage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 26px;
+    z-index: 9999;
+    padding: 20px;
+}
+
+/* 📱 Portrait mode → show rotate message */
+@media screen and (orientation: portrait) {
+    .grid,
+    .center-box,
+    #truthBox {
+        display: none;
+    }
+
+    #rotateMessage {
+        display: flex;
+    }
+}
